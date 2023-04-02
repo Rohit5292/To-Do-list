@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [task, setTask] = useState("");
+  const [todoList, setTodoList] = useState([]);
+
+  function taskadded(event) {
+    setTask(event.target.value);
+  }
+
+  function addTask() {
+    if (task === "") {
+      alert("Please write something.");
+    } else {
+      setTodoList([...todoList, task]);
+      setTask("");
+    }
+  }
+
+  function removeTask(index) {
+    const newTodoList = [...todoList];
+    newTodoList.splice(index, 1);
+    setTodoList(newTodoList);
+  }
+
+  const listItems = todoList.map((task, index) => (
+    <li key={index}>
+      {task}
+      <button className='close' onClick={() => removeTask(index)}>X</button>
+    </li>
+  ));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <div className="header">
+      <input value={task} onChange={taskadded} type="text" />
+      <button className='addBtn' onClick={addTask}>Add</button>
+    </div>
+      <ul className='myUL"'>{listItems}</ul>
     </div>
   );
 }
