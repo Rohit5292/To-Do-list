@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
-function App() {
+function ToDOList() {
   const [task, setTask] = useState("");
   const [todoList, setTodoList] = useState([]);
 
@@ -42,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default ToDOList;
